@@ -1,0 +1,33 @@
+﻿@page
+@model Job_Post_Website.Pages.JobPages.ViewJobModel
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-0">
+            <h2 class="text-primary pl-3">@Model._job.Name</h2>
+        </div>
+        <div class="row pb-2">
+            <p style="font-size:11px;color:black;">Posted by: @Model._job.JobPosterNormalizedUserName on @Model._job.DateTimePosted</p>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <p>@Model._job.Description</p>
+        </div>
+    @if (Model.AuthorizedToEdit)
+    {
+        <a asp-page="EditJob" asp-route-id="@Model._job.Id">
+            <button type="button" class="btn btn-primary" style="width:150px;">Edit Job</button>
+        </a>
+    }
+    @if (Model.AuthenticatedToMessageJobPoster)
+    {
+        <a asp-page="/UserPages/StartMessageThread" asp-route-jobName="@Model._job.Name"  asp-route-recipientNormalizedUserName="@Model._job.JobPosterNormalizedUserName">
+            <button type="button" class="btn btn-primary" style="width:150px;">Inquire</button>
+        </a>
+    }
+    </div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

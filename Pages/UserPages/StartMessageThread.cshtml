@@ -1,0 +1,36 @@
+﻿@page
+@using Job_Post_Website.Model;
+@model Job_Post_Website.Pages.UserPages.StartMessageThreadModel
+@{
+}
+
+
+<form method="post" asp-route-secondPartyId="@Model._secondParty.Id">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Start a Message Thread</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="_messageToSend.MessageRecipient"></label>
+            <input asp-for="_messageToSend.MessageRecipient" class="form-control" value="@Model.RecipientName"/>
+            <span asp-validation-for="_messageToSend.MessageRecipient" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="_messageToSend.MessageTitle">
+                
+            </label>
+            <input asp-for="_messageToSend.MessageTitle" class="form-control" value="Re: @Model.JobName" />
+            <span asp-validation-for="_messageToSend.MessageTitle" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="_messageToSend.MessageBody"></label>
+            <input asp-for="_messageToSend.MessageBody" class="form-control" />
+            <span asp-validation-for="_messageToSend.MessageBody" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+    </div>
+</form>
+
+
+

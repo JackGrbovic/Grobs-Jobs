@@ -1,0 +1,30 @@
+﻿@page
+@using Job_Post_Website.Model;
+@using Job_Post_Website.ScaffoldedModels;
+@model Job_Post_Website.Pages.UserPages.InboxModel
+@{
+}
+
+
+@for (int i = 0; i < Model._previewMessages.Count; i++)
+{
+    <div class="border p-3 mt-4" style="width:600px; align-content:center;">
+        <div class="row pb-2">
+            <h2 style="color:lightseagreen; font-size:20px;">&quot;@Model._previewMessages[i].MessageTitle&quot; with @Model._normalizedUserNamesWithoutLoggedInUser[i]</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <p><b>@Model._previewMessages[i].MessageBody</b></p>
+        </div>
+        <div class="mb-3">
+            <p style="color: deepskyblue;">@Model._previewMessages[i].MessageSenderUserName at @Model._previewMessages[i].DateTimeSent</p>
+        </div>
+        <a asp-page="MessageThread" asp-route-secondPartyId="@Model._idsWithoutLoggedInUser[i]">
+            <button type="button" class="btn btn-primary" style="width:150px;">View/Respond</button>
+        </a>
+    </div>
+}
+
+
+    
+

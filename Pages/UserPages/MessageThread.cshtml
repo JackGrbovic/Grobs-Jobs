@@ -1,0 +1,44 @@
+﻿@page
+@using Job_Post_Website.Model;
+@model Job_Post_Website.Pages.UserPages.MessageThreadModel
+@{
+}
+
+@foreach (Message message in Model._sharedMessages)
+{
+    if (message.MessageSender == Model._firstParty.Id)
+    {
+        //display message highlighted in purple
+        <div class="border p-3 mt-4 bg-body" style="text-align:right;">
+            <div class="mb-3">
+                <p style="color:mediumpurple">You:</p>
+            </div>
+            <div class="mb-3">
+                <p>@message.MessageBody</p>
+            </div>
+        </div>
+    }
+    else if (message.MessageSender == Model._secondParty.Id)
+    {
+        //display message highlighted in seagreen
+        <div class="border p-3 mt-4 bg-light" style="text-align:left;">
+            <div class="mb-3">
+                <p style="color:lightseagreen">@Model._secondParty.NormalizedUserName</p>
+            </div>
+            <div class="mb-3">
+                <p>@message.MessageBody</p>
+            </div>
+        </div>
+    }
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="mb-3">
+            <label asp-for="_messageToSend.MessageBody"></label>
+            <input asp-for="_messageToSend.MessageBody" class="form-control" />
+            <span asp-validation-for="_messageToSend.MessageBody" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px;" asp-route-secondPartyId="@Model._secondParty.Id">Send Message</button>
+    </div>
+</form>
