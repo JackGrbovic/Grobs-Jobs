@@ -1,0 +1,69 @@
+﻿@page
+@model Job_Post_Website.Pages.IndexModel
+
+<div class="container p-3">
+    <div class="row pt=4">
+        <div class="col-6">
+            <h2 class="text-primary">Job List</h2>
+        </div>
+        @if (Model.isLoggedIn)
+        {
+            <div class="col-6 text-end">
+                <a asp-page="/JobPages/Create" class="btn btn-primary"><i class="bi bi-pencil-square"></i> &nbsp;Post A New Job</a>
+            </div>
+        }
+        else
+        {
+            <div class="col-6 text-end">
+                <a asp-page="/UserPages/Login" class="btn btn-primary"><i class="bi bi-pencil-square"></i> &nbsp;Post A New Job</a>
+            </div>
+        }
+
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered table-striped mb-2" style="width:100%; border-spacing : 0 10px">
+        <thead>
+            <tr>
+                <th>
+                    Job Name
+                </th>
+                <th>
+                    Job Description
+                </th>
+                <th>
+                    Date Posted
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.Jobs)
+            {
+                <tr>
+                    <td>
+                        <a asp-page="/JobPages/ViewJob" asp-route-id="@obj.Id">@obj.Name</a>
+                    </td>
+
+                    @if (obj.Description.Length > 60)
+                    {
+                        string shortenedDescription = "";
+                        for (int i = 0; i < 60; i++)
+                        {
+                            shortenedDescription += obj.Description[i];
+                        }
+                        shortenedDescription += "...";
+                        <td>@shortenedDescription</td>
+                    }
+                    else
+                    {
+                        <td>@obj.Description</td>
+                    }
+
+                    <td>@obj.DateTimePosted</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

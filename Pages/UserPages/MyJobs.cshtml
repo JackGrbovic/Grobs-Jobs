@@ -1,0 +1,54 @@
+﻿@page
+@model Job_Post_Website.Pages.UserPages.MyJobsModel
+@{
+}
+
+@if(Model.UserIsAuthenticated)
+{
+    <table class="table table-bordered table-striped mb-2" style="width:100%; border-spacing : 0 10px">
+        <thead>
+            <tr>
+                <th>
+                    Job Name
+                </th>
+                <th>
+                    Job Description
+                </th>
+                <th>
+                    Date Posted
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model._jobs)
+            {
+                <tr>
+                    <td>
+                        <a asp-page="/JobPages/ViewJob" asp-route-id="@obj.Id">@obj.Name</a>
+                    </td>
+
+                    @if (obj.Description.Length > 60)
+                    {
+                        string shortenedDescription = "";
+                        for (int i = 0; i < 60; i++)
+                        {
+                            shortenedDescription += obj.Description[i];
+                        }
+                        shortenedDescription += "...";
+                        <td>@shortenedDescription</td>
+                    }
+                    else
+                    {
+                        <td>@obj.Description</td>
+                    }
+
+                    <td>@obj.DateTimePosted</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p style="color:red">No user is logged in. Please log in to view this page.</p>
+}

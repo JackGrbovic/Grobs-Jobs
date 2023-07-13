@@ -1,0 +1,31 @@
+﻿@page
+@model Job_Post_Website.Pages.JobPages.EditJobModel
+
+<form method="post">
+    <input hidden asp-for="Job.Id" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Edit Job</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Job.Name"></label>
+            <input asp-for="Job.Name" class="form-control" />
+            <span asp-validation-for="@Model.Job.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Job.Description"></label>
+            <input asp-for="Job.Description" class="form-control" value="@Model.Job.Description"/>
+            <span asp-validation-for="@Model.Job.Description" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-primary" style="width:150px;" asp-page-handler="Update" value="Update Job"></input>
+        <input type="submit" class="btn btn-danger" style="width:150px;" asp-page-handler="Delete" value="Delete Job"></input>
+
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

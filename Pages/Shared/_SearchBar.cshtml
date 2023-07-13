@@ -1,0 +1,11 @@
+﻿@page
+@model Job_Post_Website.Pages.Shared._SearchBarModel
+@{
+}
+
+<form method="post" action="/JobPages/Search">
+    @Html.AntiForgeryToken()
+    <input type="text" name="queryString" />
+    <button type="submit">Search</button>
+</form>
+
